@@ -1,0 +1,29 @@
+{
+  "name": "ossystem-skype-bot",
+  "version": "1.0.0",
+  "description": "Ossytem messaging bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rotimi-Best/ossystem-skype-bot.git"
+  },
+  "keywords": [
+    "skype",
+    "bot",
+    "ossystem"
+  ],
+  "author": "Rotimi-Best",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rotimi-Best/ossystem-skype-bot/issues"
+  },
+  "homepage": "https://github.com/Rotimi-Best/ossystem-skype-bot#readme",
+  "dependencies": {
+    "botbuilder": "^4.2.1",
+    "dotenv": "^6.2.0",
+    "restify": "^8.0.0"
+  }
+}
