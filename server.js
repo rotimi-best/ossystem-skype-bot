@@ -4,7 +4,7 @@ const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 
 const server = restify.createServer();
 
-const PORT = process.env.PORT || 3900;
+const PORT = process.env.PORT || 3978;
 
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
@@ -30,10 +30,10 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-server.get('/api/messages', (req, res) => {
+server.get('/api/messages', async (req, res) => {
   if (reference) {
     console.log("Got the reference");
-    
+
     reference = JSON.parse(reference);
 
     await adapter.continueConversation(reference, async (context) => {

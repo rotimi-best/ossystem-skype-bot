@@ -1,61 +1,63 @@
 {
-  "name": "ossystem",
-  "padlock": "rhnpwq9QIuwGVch7v1Mc2w==!NjPsECKd3X2c2dxTyuW+3jAlPxeXW0Fx/EItMpmJOanbjLR4jneoi5raXvUGjPpU",
-  "version": "2.0",
-  "services": [
-    {
-      "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
-      "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
-      "resourceGroup": "ossystem",
-      "serviceName": "ossystem",
-      "type": "abs",
-      "name": "ossystem",
-      "id": "1"
-    },
-    {
-      "connectionString": "dzl8KGGjHKTS/UfBuYUX3Q==!yUivqcsVroDW3tlY3I3+xbSvLs4lRSEqeVgapQjIO5omC64vHk7rbv/xst5xZty6+Rd0ntmL9a0NK9TuOiO9CkccE29WLnlmNlfjnHYDsXIzeZjWcC7nrU9RIlndVo0d5gY1tk7UjD6N+JZ5oct9Vm8QC/AMhEUocR7wYOz9Y9CGUGIbOS4qTG69b1VCprrJky+YTxG6xvN/9gVSz3FfDg==",
-      "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
-      "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
-      "resourceGroup": "ossystem",
-      "serviceName": "ossystemb052",
-      "type": "blob",
-      "id": "2"
-    },
-    {
-      "appId": "",
-      "appPassword": "",
-      "endpoint": "http://localhost:3978/api/messages",
-      "type": "endpoint",
-      "name": "development",
-      "id": "3"
-    },
-    {
-      "appId": "fa712a30-a8a1-4e01-8365-183e9c596a84",
-      "appPassword": "FHGiVzUjBxFyaMENlB4t3g==!Qw4C+HjzLxxlGq3PvUIjDf97JHwCY2zf/Bv9J0Y9oY8=",
-      "endpoint": "https://ossystem.azurewebsites.net/api/messages",
-      "type": "endpoint",
-      "name": "production",
-      "id": "4"
-    },
-    {
-      "instrumentationKey": "hSqGQUT1wIYgZVb3tl652w==!vcCVWxWAj2Rar0+apZjY7t8yc5qp20aoY5xdjRtd1Sk8ZVZ+2wGhMswP+9UIsihF",
-      "applicationId": "5faf0f2f-a774-4a1f-8b12-5a3ac1892c49",
-      "apiKeys": {},
-      "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
-      "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
-      "resourceGroup": "ossystem",
-      "serviceName": "ossystem3jjima",
-      "type": "appInsights",
-      "id": "5"
-    },
-    {
-      "appId": "cb705e2c-c073-4ca8-9e60-c087d4919fe0",
-      "authoringKey": "MU59ZREKA2bocJRteRqBHg==!becWmKw0knxMGUs5BS5enbeoldDDTuBGKK/HautguzPi6FSPTCYGzRq2qoElnI6m",
-      "version": "0.1",
-      "region": "westus",
-      "type": "luis",
-      "name": "BasicBotLuisApplication",
-      "id": "6"
-    }
-  ]
+    "name": "ossystem",
+    "description": "",
+    "services": [
+        {
+            "type": "abs",
+            "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
+            "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
+            "resourceGroup": "ossystem",
+            "serviceName": "ossystem",
+            "name": "ossystem",
+            "id": "1",
+            "appId": "fa712a30-a8a1-4e01-8365-183e9c596a84"
+        },
+        {
+            "type": "blob",
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=ossystemb052;AccountKey=nctYz8pnVGQhAMO8fCL2DH6ffcVYNX1/v17v5gVzjf4DllKL5wxIhoOeUQNPzMQiTnIEyZnufgndKvh5CL6low==;",
+            "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
+            "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
+            "resourceGroup": "ossystem",
+            "serviceName": "ossystemb052",
+            "id": "2"
+        },
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages",
+            "name": "development",
+            "id": "3"
+        },
+        {
+            "type": "endpoint",
+            "appId": "fa712a30-a8a1-4e01-8365-183e9c596a84",
+            "appPassword": "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#",
+            "endpoint": "https://ossystem.azurewebsites.net/api/messages",
+            "name": "production",
+            "id": "4"
+        },
+        {
+            "type": "appInsights",
+            "instrumentationKey": "1e6a2845-edc3-45e5-ac77-c57d2b6585d7",
+            "applicationId": "5faf0f2f-a774-4a1f-8b12-5a3ac1892c49",
+            "apiKeys": {},
+            "tenantId": "b880b48c-fbbb-4880-83b6-eb49831495a0",
+            "subscriptionId": "28c6dea0-8563-4f09-9d13-7d98008566b5",
+            "resourceGroup": "ossystem",
+            "serviceName": "ossystem3jjima",
+            "id": "5"
+        },
+        {
+            "type": "luis",
+            "appId": "cb705e2c-c073-4ca8-9e60-c087d4919fe0",
+            "authoringKey": "580fa5f52e8b4a4ab7191cce27cb40be",
+            "version": "0.1",
+            "region": "westus",
+            "name": "BasicBotLuisApplication",
+            "id": "6"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0"
 }
