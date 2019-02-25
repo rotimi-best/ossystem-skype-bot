@@ -40,8 +40,8 @@ server.get('/api/messages', async (req, res) => {
        await context.sendActivity("Hi there, what do you think\n\n\nGreat");
     });
 
-    res.send(200, "Okay");
   } else {
     console.log("Dont have the reference");
   }
+    res.send(200, "Okay");
 });
