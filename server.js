@@ -6,6 +6,10 @@ const server = restify.createServer();
 
 server.use(restify.plugins.queryParser());
 
+server.use(restify.plugins.bodyParser({
+  mapParams: true
+}));
+
 const PORT = process.env.PORT || 3978;
 
 server.listen(PORT, () => {
@@ -13,17 +17,16 @@ server.listen(PORT, () => {
 });
 
 const adapter = new BotFrameworkAdapter({
-    appId: "fa712a30-a8a1-4e01-8365-183e9c596a84",
-    appPassword: "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#"
+    appId: process.env.APP_ID,
+    appPassword: process.env.APP_PASSWORD
 });
 
 const { MyBot } = require('./bot');
 let reference;
 
-// Create the main dialog.
 const myBot = new MyBot();
 
-// Listen for incoming requests.
+// Respond to call on skype
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
       reference = JSON.stringify(TurnContext.getConversationReference(context.activity));
@@ -32,19 +35,29 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-server.get('/api/messages', async (req, res) => {
+// Get reference
+server.get('/api/reference', async (req, res) => {
   if (reference) {
     console.log("Got the reference");
 
-    // reference = JSON.parse(reference);
+    res.send(200, `Here is the reference =: ${reference}`);
 
+  } else {
+    res.send(200, `No refrence yet`);
+  }
+});
+
+// Send links to a group
+server.post('/api/links', async (req, res) => {
+  const { reference, data } = req.body;
+
+  if (reference) {
     await adapter.continueConversation(JSON.parse(reference), async (context) => {
-       await context.sendActivity("I can now send messages dynamically");
+       await context.sendActivity(data);
     });
   } else {
     console.log("Dont have the reference");
   }
-  // const query = JSON.stringify(req.query) || 'Empty query';
 
-  res.send(200, `Okay here is your query=>: ${reference}`);
+  res.send(200);
 });
