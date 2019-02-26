@@ -4,6 +4,8 @@ const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 
 const server = restify.createServer();
 
+server.use(restify.plugins.queryParser());
+
 const PORT = process.env.PORT || 3978;
 
 server.listen(PORT, () => {
@@ -43,7 +45,7 @@ server.get('/api/messages', async (req, res) => {
   } else {
     console.log("Dont have the reference");
   }
-  const params = JSON.stringify(req.params) || 'Empty params';
+  const query = JSON.stringify(req.query) || 'Empty query';
 
-  res.send(200, `Okay here is your params: ${params}`);
+  res.send(200, `Okay here is your query: ${query}`);
 });
