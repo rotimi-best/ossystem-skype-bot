@@ -4,15 +4,15 @@ const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 
 const server = restify.createServer();
 
-const PORT = 3978;
+const PORT = process.env.PORT || 3978;
 
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
 
 const adapter = new BotFrameworkAdapter({
-    appId: "fa712a30-a8a1-4e01-8365-183e9c596a84",
-    appPassword: "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#"
+    appId: process.env.APP_ID,
+    appPassword: process.env.APP_PASSWORD
 });
 
 const { MyBot } = require('./bot');
@@ -40,8 +40,8 @@ server.get('/api/messages', async (req, res) => {
        await context.sendActivity("Hi there, what do you think\n\n\nGreat");
     });
 
+    res.send(200, "Okay");
   } else {
     console.log("Dont have the reference");
   }
-    res.send(200, "Okay");
 });
