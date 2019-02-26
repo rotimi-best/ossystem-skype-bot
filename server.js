@@ -13,8 +13,8 @@ server.listen(PORT, () => {
 });
 
 const adapter = new BotFrameworkAdapter({
-    appId: process.env.APP_ID,
-    appPassword: process.env.APP_PASSWORD
+    appId: "fa712a30-a8a1-4e01-8365-183e9c596a84",
+    appPassword: "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#"
 });
 
 const { MyBot } = require('./bot');
