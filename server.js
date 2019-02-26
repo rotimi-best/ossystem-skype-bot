@@ -4,15 +4,15 @@ const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 
 const server = restify.createServer();
 
-const PORT = process.env.PORT || 3978;
+const PORT = 3978;
 
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
 
 const adapter = new BotFrameworkAdapter({
-    appId: process.env.APP_ID || "fa712a30-a8a1-4e01-8365-183e9c596a84",
-    appPassword: process.env.APP_PASSWORD || "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#"
+    appId: "fa712a30-a8a1-4e01-8365-183e9c596a84",
+    appPassword: "oyOS$}06qS:D)s(@uCcjXY}(5nvJ#"
 });
 
 const { MyBot } = require('./bot');
