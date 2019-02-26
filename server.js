@@ -30,7 +30,7 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-server.get('/api/messages', async (req, res) => {
+server.get('/api/messages/', async (req, res) => {
   if (reference) {
     console.log("Got the reference");
 
@@ -43,7 +43,7 @@ server.get('/api/messages', async (req, res) => {
   } else {
     console.log("Dont have the reference");
   }
-  const queries = JSON.stringify(req.query) || 'Empty query';
-  
-  res.send(200, `Okay here is your query ${queries}`);
+  const params = JSON.stringify(req.params) || 'Empty params';
+
+  res.send(200, `Okay here is your params: ${params}`);
 });
