@@ -30,7 +30,7 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-server.get('/api/messages/', async (req, res) => {
+server.get('/api/messages', async (req, res) => {
   if (reference) {
     console.log("Got the reference");
 
