@@ -36,16 +36,15 @@ server.get('/api/messages', async (req, res) => {
   if (reference) {
     console.log("Got the reference");
 
-    reference = JSON.parse(reference);
+    // reference = JSON.parse(reference);
 
-    await adapter.continueConversation(reference, async (context) => {
-       await context.sendActivity("Hi there, what do you think\n\n\nGreat");
+    await adapter.continueConversation(JSON.parse(reference), async (context) => {
+       await context.sendActivity("I can now send messages dynamically");
     });
-
   } else {
     console.log("Dont have the reference");
   }
-  const query = JSON.stringify(req.query) || 'Empty query';
+  // const query = JSON.stringify(req.query) || 'Empty query';
 
-  res.send(200, `Okay here is your query: ${query}`);
+  res.send(200, `Okay here is your query=>: ${reference}`);
 });
