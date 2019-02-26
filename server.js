@@ -40,8 +40,10 @@ server.get('/api/messages', async (req, res) => {
        await context.sendActivity("Hi there, what do you think\n\n\nGreat");
     });
 
-    res.send(200, "Okay");
   } else {
     console.log("Dont have the reference");
   }
+  const queries = JSON.stringify(req.query) || 'Empty query';
+  
+  res.send(200, `Okay here is your query ${queries}`);
 });
