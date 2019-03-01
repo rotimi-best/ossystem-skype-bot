@@ -32,6 +32,8 @@ server.post('/api/messages', (req, res) => {
       reference = JSON.stringify(TurnContext.getConversationReference(context.activity));
 
       await myBot.onTurn(context);
+      
+      console.log('Getting the reference of chat and storing it in memory', reference);
     });
 });
 
@@ -48,16 +50,25 @@ server.get('/api/reference', async (req, res) => {
 });
 
 // Send links to a group
-server.post('/api/links', async (req, res) => {
+server.post('/api/links', async (req, res) => {  
   const { reference, data } = req.body;
 
+  console.log('Ref\n\n', reference)
+  console.log('\nData', data)
+  
+  let response = '';
+  
   if (reference) {
+    response = "sending links to group";
+    
     await adapter.continueConversation(JSON.parse(reference), async (context) => {
        await context.sendActivity(data);
     });
   } else {
-    console.log("Dont have the reference");
+    response = "Dont have the reference";
   }
-
-  res.send(200);
+  
+  console.log(response);
+  
+  res.send(200, response);
 });

@@ -10,9 +10,9 @@ class MyBot {
         if (turnContext.activity.type === ActivityTypes.Message) {
             const inbox = turnContext.activity.text
             console.log(inbox)
-            await turnContext.sendActivity(`You said '${inbox}'`);
+            await turnContext.sendActivity(`Okay, I've heard you. You said ## ${inbox} ##`);
         } else {
-            await turnContext.sendActivity(`[${ turnContext.activity.type } event detected]`);
+            await turnContext.sendActivity(`[${turnContext.activity.type} event detected]`);
         }
     }
 }
