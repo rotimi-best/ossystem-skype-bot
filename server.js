@@ -45,30 +45,36 @@ server.get('/api/reference', async (req, res) => {
     res.send(200, `Here is the reference =: ${reference}`);
 
   } else {
+    console.log('No refrence yet')
+
     res.send(200, `No refrence yet`);
   }
 });
 
 // Send links to a group
-server.post('/api/links', async (req, res) => {  
-  const { reference, data } = req.body;
-
-  console.log('Ref\n\n', reference)
-  console.log('\nData', data)
+server.post('/api/links', async (req, res) => {
+  try {
+    const { reference, data } = req.body;
   
-  let response = '';
-  
-  if (reference) {
-    response = "sending links to group";
+    console.log('Ref\n\n', reference)
+    console.log('\nData', data)
     
-    await adapter.continueConversation(JSON.parse(reference), async (context) => {
-       await context.sendActivity(data);
-    });
-  } else {
-    response = "Dont have the reference";
+    let response = '';
+    
+    if (reference) {
+      response = "sending links to group";
+      
+      await adapter.continueConversation(JSON.parse(reference), async (context) => {
+         await context.sendActivity(data);
+      });
+    } else {
+      response = "Dont have the reference";
+    }
+    
+    console.log(response);
+    
+    res.send(200, response);
+  } catch (error) {
+    res.send(400, `Request error ${error}`);
   }
-  
-  console.log(response);
-  
-  res.send(200, response);
 });
