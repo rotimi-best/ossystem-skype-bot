@@ -22,32 +22,33 @@ const adapter = new BotFrameworkAdapter({
 });
 
 const { MyBot } = require('./bot');
-let reference;
+let REFERENCE = null;
 
 const myBot = new MyBot();
 
 // Respond to call on skype
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
-      reference = JSON.stringify(TurnContext.getConversationReference(context.activity));
+      REFERENCE = JSON.stringify(TurnContext.getConversationReference(context.activity));
 
       await myBot.onTurn(context);
-      
-      console.log('Getting the reference of chat and storing it in memory', reference);
+
+      console.log('Getting the reference of chat and storing it in memory', REFERENCE);
     });
 });
 
 // Get reference
 server.get('/api/reference', async (req, res) => {
-  if (reference) {
+  if (REFERENCE) {
     console.log("Got the reference");
 
-    res.send(200, `Here is the reference =: ${reference}`);
-
+    res.send(200, JSON.stringify({ REFERENCE }));
+    
+    REFERENCE = null;
   } else {
     console.log('No refrence yet')
 
-    res.send(200, `No refrence yet`);
+    res.send(400, 'No refrence yet');
   }
 });
 
@@ -63,10 +64,15 @@ server.post('/api/links', async (req, res) => {
     
     if (reference) {
       response = "sending links to group";
-      
-      await adapter.continueConversation(JSON.parse(reference), async (context) => {
-         await context.sendActivity(data);
-      });
+      try {
+        await adapter.continueConversation(JSON.parse(reference), async (context) => {
+           await context.sendActivity(data);
+        });
+      } catch (error) {
+        await adapter.continueConversation(JSON.parse(REFERENCE), async (context) => {
+           await context.sendActivity(data);
+        });
+      }
     } else {
       response = "Dont have the reference";
     }

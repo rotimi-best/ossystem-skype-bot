@@ -9,8 +9,8 @@ class MyBot {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         if (turnContext.activity.type === ActivityTypes.Message) {
             const inbox = turnContext.activity.text
-            console.log(inbox)
-            await turnContext.sendActivity(`Okay, I've heard you. You said ## ${inbox} ##`);
+            console.log(inbox);
+            await turnContext.sendActivity(`Okay, I've heard you. You said ${inbox}`);
         } else {
             await turnContext.sendActivity(`[${turnContext.activity.type} event detected]`);
         }
