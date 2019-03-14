@@ -59,7 +59,7 @@ server.post('/api/links', async (req, res) => {
   
     console.log('Ref\n\n', reference)
     console.log('\nData', data)
-    
+
     let response = '';
     
     if (reference) {
@@ -76,9 +76,9 @@ server.post('/api/links', async (req, res) => {
     } else {
       response = "Dont have the reference";
     }
-    
+
     console.log(response);
-    
+
     res.send(200, response);
   } catch (error) {
     res.send(400, `Request error ${error}`);
