@@ -98,3 +98,25 @@ server.post('/api/links', async (req, res) => {
     res.send(400, `Request error ${error}`);
   }
 });
+
+function howBotWorks() {
+  // First I store the reference from the first inbox
+  server.post('/api/messages', (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+      const reference = TurnContext.getConversationReference(context.activity);
+
+
+      // Call the function that sends message within an interval
+      sendMessageNow(reference);
+    })
+  })
+
+  // Secondly I use the reference to continue the conversation
+  function sendMessageNow(reference) {
+    setInterval(async () => {
+      await adapter.continueConversation(JSON.parse(reference), async (context) => {
+        await context.sendActivity("Sending a new message");
+      });
+    }, 5000);
+  }
+}
