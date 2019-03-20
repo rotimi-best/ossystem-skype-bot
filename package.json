@@ -24,6 +24,7 @@
   "dependencies": {
     "botbuilder": "^4.2.1",
     "dotenv": "^6.2.0",
+    "nedb-promises": "^3.0.2",
     "restify": "^8.0.0"
   }
 }

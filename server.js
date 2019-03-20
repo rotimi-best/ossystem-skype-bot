@@ -2,6 +2,7 @@ require('dotenv').config();
 const restify = require('restify');
 const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 
+// Restify server setup
 const server = restify.createServer();
 
 server.use(restify.plugins.queryParser());
@@ -12,15 +13,18 @@ server.use(restify.plugins.bodyParser({
 
 const PORT = process.env.PORT || 3978;
 
+// Listening to port
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
 
+// Azure Credentials
 const adapter = new BotFrameworkAdapter({
     appId: process.env.APP_ID,
     appPassword: process.env.APP_PASSWORD
 });
 
+// Bot Abstraction
 const { MyBot } = require('./bot');
 let REFERENCE = null;
 
@@ -29,11 +33,21 @@ const myBot = new MyBot();
 // Respond to call on skype
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
-      REFERENCE = JSON.stringify(TurnContext.getConversationReference(context.activity));
+      const conversationId = context.activity.conversation.id;
 
-      await myBot.onTurn(context);
+      if (conversationId === process.env.UPWORK) {
+        console.log('From upwork group');
 
-      console.log('Getting the reference of chat and storing it in memory', REFERENCE);
+        REFERENCE = JSON.stringify(TurnContext.getConversationReference(context.activity));
+
+        await myBot.onTurn(context, 'upwork');
+  
+        console.log('Got ref & stored in memory', REFERENCE);
+      } else if (conversationId == process.env.LEADGEN) {
+        console.log('From leadgen group');
+
+        await myBot.onTurn(context, 'leadgen');
+      }
     });
 });
 
