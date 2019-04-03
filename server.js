@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cron = require('node-cron');
 const restify = require('restify');
 const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 const { sendMsgToAdminOnTelegram } = require('./module');
@@ -49,6 +50,11 @@ server.post('/api/messages', (req, res) => {
         console.log('From leadgen group');
 
         await myBot.onTurn(context, 'leadgen');
+      } else {
+        // const myRef
+        console.log('From Ossystem group');
+
+        await myBot.onTurn(context, 'something');
       }
     });
 });
@@ -123,8 +129,10 @@ function howBotWorks() {
   }
 }
 
-async function BreakTimeNotifier() {
+async function BreakTimeNotifier(time) {
   const breakTime = `Проветривание) перерыв 10 мин`;
+
+  await sendMsgToAdminOnTelegram(`Sending ${time} message to the group`);
 
 /**
  * Проветривание) перерыв 10 мин
@@ -148,10 +156,14 @@ async function BreakTimeNotifier() {
   }
 };
 
-
-
-require('node-cron').schedule('*/2 * * * *', async () => {
-  console.log('running on every 2 minutes');
+cron.schedule('15 11 * * *', async () => {
+  console.log('Sending to group notification');
   
-  await BreakTimeNotifier();
+  await BreakTimeNotifier('11:15');
+});
+
+cron.schedule('30 15 * * *', async () => {
+  console.log('Sending to group notification');
+  
+  await BreakTimeNotifier('3:30');
 });
