@@ -1,6 +1,9 @@
 require('dotenv').config();
 const restify = require('restify');
+const crontab = require('node-cron');
 const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
+const { sendMsgToAdminOnTelegram } = require('./module');
+const { GROUP_REF } = process.env;
 
 // Restify server setup
 const server = restify.createServer();
@@ -120,3 +123,32 @@ function howBotWorks() {
     }, 5000);
   }
 }
+
+async function BreakTimeNotifyer() {
+  const breakTime = `Проветривание) перерыв 10 мин`;
+
+/**
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ * Проветривание) перерыв 10 мин
+ */
+
+  try {
+    await adapter.continueConversation(JSON.parse(GROUP_REF), async (context) => {
+      await context.sendActivity(breakTime);
+    });
+  } catch (error) {
+    await sendMsgToAdminOnTelegram(`Couldn't send message to Ossystem group`);
+  }
+};
+
+crontab.schedule('*/1 * * * *', async () => {
+  await BreakTimeNotifyer();
+});
