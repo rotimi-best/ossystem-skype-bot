@@ -1,6 +1,5 @@
 require('dotenv').config();
 const restify = require('restify');
-const crontab = require('node-cron');
 const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 const { sendMsgToAdminOnTelegram } = require('./module');
 const { GROUP_REF } = process.env;
@@ -149,6 +148,6 @@ async function BreakTimeNotifyer() {
   }
 };
 
-crontab.schedule('*/1 * * * *', async () => {
+setInterval(async () => {
   await BreakTimeNotifyer();
-});
+}, 60000);
