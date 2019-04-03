@@ -123,7 +123,7 @@ function howBotWorks() {
   }
 }
 
-async function BreakTimeNotifyer() {
+async function BreakTimeNotifier() {
   const breakTime = `Проветривание) перерыв 10 мин`;
 
 /**
@@ -148,6 +148,10 @@ async function BreakTimeNotifyer() {
   }
 };
 
-setInterval(async () => {
-  await BreakTimeNotifyer();
-}, 60000);
+
+
+require('node-cron').schedule('*/2 * * * *', async () => {
+  console.log('running on every 2 minutes');
+  
+  await BreakTimeNotifier();
+});
