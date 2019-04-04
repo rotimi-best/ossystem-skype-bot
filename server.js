@@ -156,13 +156,13 @@ async function BreakTimeNotifier(time) {
   }
 };
 
-cron.schedule('15 11 * * *', async () => {
+cron.schedule('15 08 * * *', async () => {
   console.log('Sending to group notification');
   
   await BreakTimeNotifier('11:15');
 });
 
-cron.schedule('30 15 * * *', async () => {
+cron.schedule('30 12 * * *', async () => {
   console.log('Sending to group notification');
   
   await BreakTimeNotifier('3:30');
