@@ -52,9 +52,10 @@ server.post('/api/messages', (req, res) => {
         await myBot.onTurn(context, 'leadgen');
       } else {
         // const myRef
-        console.log('From Ossystem group');
+        const myRef = JSON.stringify(TurnContext.getConversationReference(context.activity));
 
-        await myBot.onTurn(context, 'something');
+        console.log('REFERENCE FROM ANOTHER GROUP: ', myRef);
+        // await myBot.onTurn(context, 'something');
       }
     });
 });
@@ -129,27 +130,26 @@ function howBotWorks() {
   }
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 async function BreakTimeNotifier(time) {
-  const breakTime = `Проветривание) перерыв 10 мин`;
+  const breakTimeTemplates = [
+    "Проветривание)",
+    "Перерыв 10 мин",
+    "У нас перерыв 10 минут! Проветривание!",
+    "Проветривание) перерыв 10 мин", 
+    "Перерыв  для здоровья, проветривание."
+  ];
+
+  const choosenTemplate = breakTimeTemplates[getRandomInt(breakTimeTemplates.length)];
 
   await sendMsgToAdminOnTelegram(`Sending ${time} message to the group`);
 
-/**
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- * Проветривание) перерыв 10 мин
- */
-
   try {
     await adapter.continueConversation(JSON.parse(GROUP_REF), async (context) => {
-      await context.sendActivity(breakTime);
+      await context.sendActivity(choosenTemplate);
     });
   } catch (error) {
     await sendMsgToAdminOnTelegram(`Couldn't send message to Ossystem group`);
