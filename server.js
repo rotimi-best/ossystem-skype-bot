@@ -166,7 +166,7 @@ cron.schedule('45 08 * * MON,TUE,WED,THU,FRI', async () => {
   console.log('Sending to group notification for 11:45am');
   
   await adapter.continueConversation(JSON.parse(TEST_GROUP_REF), async (context) => {
-    await context.sendActivity(choosenTemplate);
+    await context.sendActivity("Проветривание еще раз ;)");
   });
 });
 
