@@ -169,14 +169,6 @@ cron.schedule('15 08 * * MON,TUE,WED,THU,FRI', async () => {
   await BreakTimeNotifier('11:15');
 });
 
-cron.schedule('45 08 * * MON,TUE,WED,THU,FRI', async () => {
-  console.log('Sending to group notification for 11:45am');
-  
-  await adapter.continueConversation(JSON.parse(TEST_GROUP_REF), async (context) => {
-    await context.sendActivity("Проветривание еще раз ;)");
-  });
-});
-
 cron.schedule('30 12 * * MON,TUE,WED,THU,FRI', async () => {
   console.log('Sending to group notification for 3:30pm');
   
