@@ -3,7 +3,7 @@ const cron = require('node-cron');
 const restify = require('restify');
 const { BotFrameworkAdapter, TurnContext } = require('botbuilder');
 const { sendMsgToAdminOnTelegram } = require('./module');
-const { GROUP_REF } = process.env;
+const { TEST_GROUP_REF, TALK_GROUP_REF } = process.env;
 
 // Restify server setup
 const server = restify.createServer();
@@ -148,7 +148,7 @@ async function BreakTimeNotifier(time) {
   await sendMsgToAdminOnTelegram(`Sending ${time} message to the group`);
 
   try {
-    await adapter.continueConversation(JSON.parse(GROUP_REF), async (context) => {
+    await adapter.continueConversation(JSON.parse(TALK_GROUP_REF), async (context) => {
       await context.sendActivity(choosenTemplate);
     });
   } catch (error) {
@@ -160,6 +160,14 @@ cron.schedule('15 08 * * MON,TUE,WED,THU,FRI', async () => {
   console.log('Sending to group notification for 11:15am');
   
   await BreakTimeNotifier('11:15');
+});
+
+cron.schedule('45 08 * * MON,TUE,WED,THU,FRI', async () => {
+  console.log('Sending to group notification for 11:45am');
+  
+  await adapter.continueConversation(JSON.parse(TEST_GROUP_REF), async (context) => {
+    await context.sendActivity(choosenTemplate);
+  });
 });
 
 cron.schedule('30 12 * * MON,TUE,WED,THU,FRI', async () => {
