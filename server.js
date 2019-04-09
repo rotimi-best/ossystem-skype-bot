@@ -135,21 +135,28 @@ function getRandomInt(max) {
 }
 
 async function BreakTimeNotifier(time) {
-  const breakTimeTemplates = [
-    "Проветривание)",
-    "Перерыв 10 мин",
-    "У нас перерыв 10 минут! Проветривание!",
-    "Проветривание) перерыв 10 мин", 
-    "Перерыв  для здоровья, проветривание."
+  const emojis = [
+    ';)', '(like)', '(skip)', '(y)', '(aokijump)', '(headphones)',
+    '(rock)', '(celebrate)', '(noworries)', '(victory)', '(fistbump)'
   ];
 
-  const choosenTemplate = breakTimeTemplates[getRandomInt(breakTimeTemplates.length)];
+  const breakTimeTemplates = [
+    "Проветривание ;)",
+    "Перерыв 10 мин (like)",
+    "У нас перерыв 10 минут! Проветривание! (skip)",
+    "Проветривание) перерыв 10 мин (y)", 
+    "Перерыв  для здоровья, проветривание.(aokijump)"
+  ];
 
-  await sendMsgToAdminOnTelegram(`Sending ${time} message to the group`);
+  const emoji = emojis[getRandomInt(emojis.length)];
+  const choosenTemplate = breakTimeTemplates[getRandomInt(breakTimeTemplates.length)];
+  const message = `${choosenTemplate} ${emoji}`;
+
+  await sendMsgToAdminOnTelegram(`Sending ${time} message to the group\n\n${message}`);
 
   try {
     await adapter.continueConversation(JSON.parse(TALK_GROUP_REF), async (context) => {
-      await context.sendActivity(choosenTemplate);
+      await context.sendActivity(message);
     });
   } catch (error) {
     await sendMsgToAdminOnTelegram(`Couldn't send message to Ossystem group`);
