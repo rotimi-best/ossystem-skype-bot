@@ -137,20 +137,25 @@ function getRandomInt(max) {
 async function BreakTimeNotifier(time) {
   const emojis = [
     ';)', '(like)', '(skip)', '(y)', '(aokijump)', '(headphones)',
-    '(rock)', '(celebrate)', '(noworries)', '(victory)', '(fistbump)'
+    '(rock)', '(celebrate)', '(noworries)', '(victory)', '(fistbump)',
+    '(diwaliselfie)','(heston)','(holidayspirit)','(festiveparty)',
+    '(americanfootball)','(time)','(turkey)','(coffee)','(cheers)','(foxhug)',
+    '(unicorn)','(noworries)','(deadyes)','(xmasyes)','(rock)','(clap)','(amwasp)',
+    '(amflyingant)','(beckett)'
   ];
 
   const breakTimeTemplates = [
-    "Проветривание ;)",
-    "Перерыв 10 мин (like)",
-    "У нас перерыв 10 минут! Проветривание! (skip)",
-    "Проветривание) перерыв 10 мин (y)", 
-    "Перерыв  для здоровья, проветривание.(aokijump)"
+    "Проветривание",
+    "Перерыв 10 мин",
+    "У нас перерыв 10 минут! Проветривание!",
+    "Проветривание) перерыв 10 мин", 
+    "Перерыв  для здоровья, проветривание."
   ];
 
-  const emoji = emojis[getRandomInt(emojis.length)];
+  const emoji1 = emojis[getRandomInt(emojis.length)];
+  const emoji2 = emojis[getRandomInt(emojis.length)];
   const choosenTemplate = breakTimeTemplates[getRandomInt(breakTimeTemplates.length)];
-  const message = `${choosenTemplate} ${emoji}`;
+  const message = `${choosenTemplate} ${emoji1} ${emoji2}`;
 
   await sendMsgToAdminOnTelegram(`Sending ${time} message to the group\n\n${message}`);
 
