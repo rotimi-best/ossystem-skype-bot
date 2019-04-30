@@ -168,11 +168,11 @@ async function BreakTimeNotifier(time) {
   }
 };
 
-cron.schedule('15 08 * * MON,TUE,WED,THU,FRI', async () => {
-  console.log('Sending to group notification for 11:15am');
+// cron.schedule('15 08 * * MON,TUE,WED,THU,FRI', async () => {
+//   console.log('Sending to group notification for 11:15am');
   
-  await BreakTimeNotifier('11:15');
-});
+//   await BreakTimeNotifier('11:15');
+// });
 
 // cron.schedule('30 12 * * MON,TUE,WED,THU,FRI', async () => {
 //   console.log('Sending to group notification for 3:30pm');
