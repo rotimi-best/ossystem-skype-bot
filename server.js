@@ -71,7 +71,7 @@ server.get('/api/reference', async (req, res) => {
   } else {
     console.log('No refrence yet')
 
-    res.send(400, 'No refrence yet');
+    res.send(200, JSON.stringify({ REFERENCE: { hello: 'fake' } }));
   }
 });
 
